@@ -24,6 +24,22 @@ const Home = () => {
 
     return (
         <main className="bg-gray-100 text-gray-900">
+
+            {/* Yuri = adicionei uma Seção de Cabeçalho para(user_dispositivos, user_horario e user_info) Falta só a implementação das rotas*/}
+            <header className="container mx-auto text-center py-4 bg-gray-800"> 
+                <nav className="mt-2 space-x-4">
+                    <a href="/page/user_info" className="inline-block px-4 py-2 bg-gray-600 rounded hover:bg-gray-500 transition">
+                        Dashboard
+                    </a>
+                    <a href="/page/user_info_2" className="inline-block px-4 py-2 bg-gray-600 rounded hover:bg-gray-500 transition">
+                        Horários
+                    </a>
+                    <a href="/page/user_dispositivo" className="inline-block px-4 py-2 bg-gray-600 rounded hover:bg-gray-500 transition">
+                        Dispositivos
+                    </a>
+                </nav>
+            </header>
+
             {/* Seção de Introdução */}
             <section className="py-10 text-center">
                 <h1 className="text-4xl font-bold text-gray-800 mb-4 shadow-md">
