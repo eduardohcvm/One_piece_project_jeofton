@@ -2,6 +2,8 @@
 
 Projeto de treinamento desenvolvido durante as aulas com o Prof. Jeofton Costa.  
 Uma wiki interativa do universo **One Piece**, consumindo a [api-onepiece.com](https://api.api-onepiece.com/v2) para exibir personagens, Akuma no Mi, tripulações e sagas.
+<img width="1919" height="1029" alt="image" src="https://github.com/user-attachments/assets/1ad56672-3948-4508-8d6a-8ece9f32a69d" />
+
 
 ---
 
