@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Explore o universo de One Piece — personagens, Akuma no Mi, tripulações e sagas.">
+  <title>One Piece Wiki — O Mundo dos Piratas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════════════════════
+       HEADER — NAVEGAÇÃO FIXA
+  ═══════════════════════════════════════════════════════ -->
+  <header class="header" id="header">
+    <div class="container header__inner">
+      <a href="#home" class="logo" aria-label="One Piece Wiki — voltar ao topo">
+        <span class="logo__icon" aria-hidden="true">☠</span>
+        <span class="logo__text">One Piece</span>
+      </a>
+
+      <button class="hamburger" id="hamburger" aria-label="Abrir menu" aria-expanded="false" aria-controls="nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <nav class="nav" id="nav" role="navigation" aria-label="Menu principal">
+        <ul class="nav__links">
+          <li><a href="#characters" class="nav__link">Personagens</a></li>
+          <li><a href="#fruits"     class="nav__link">Akuma no Mi</a></li>
+          <li><a href="#crews"      class="nav__link">Tripulações</a></li>
+          <li><a href="#sagas"      class="nav__link">Sagas</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ═══════════════════════════════════════════════════════
+       HERO — SEÇÃO PRINCIPAL
+  ═══════════════════════════════════════════════════════ -->
+  <section class="hero" id="home" aria-label="Introdução">
+    <div class="hero__bg" aria-hidden="true">
+      <div class="hero__bg-waves"></div>
+      <div class="hero__bg-skull">☠</div>
+    </div>
+
+    <div class="container hero__content">
+      <span class="hero__badge">⚓ Grand Line Explorer</span>
+
+      <h1 class="hero__title">
+        <span class="hero__title-main">ONE PIECE</span>
+        <span class="hero__title-sub">O Mundo dos Piratas</span>
+      </h1>
+
+      <p class="hero__description">
+        Explore o universo épico criado por Eiichiro Oda. Personagens lendários,
+        Akuma no Mi misteriosas, tripulações poderosas e sagas inesquecíveis
+        aguardam você no Grand Line.
+      </p>
+
+      <div class="hero__cta">
+        <a href="#characters" class="btn btn--primary">Explorar Personagens</a>
+        <a href="#fruits"     class="btn btn--secondary">Ver Akuma no Mi</a>
+      </div>
+
+      <div class="hero__stats" id="hero-stats" aria-label="Estatísticas do universo">
+        <!-- Preenchido via JS -->
+        <div class="stat-item">
+          <span class="stat-item__number skeleton" style="width:60px;height:28px;display:block"></span>
+          <span class="stat-item__label">Personagens</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-item__number skeleton" style="width:50px;height:28px;display:block"></span>
+          <span class="stat-item__label">Akuma no Mi</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-item__number skeleton" style="width:40px;height:28px;display:block"></span>
+          <span class="stat-item__label">Tripulações</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-item__number skeleton" style="width:30px;height:28px;display:block"></span>
+          <span class="stat-item__label">Sagas</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero__scroll" aria-hidden="true">↓</div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       MAIN — CONTEÚDO PRINCIPAL
+  ═══════════════════════════════════════════════════════ -->
+  <main id="main-content">
+
+    <!-- ── PERSONAGENS ──────────────────────────────────── -->
+    <section class="section" id="characters" aria-labelledby="characters-title">
+      <div class="container">
+        <header class="section__header">
+          <h2 class="section__title" id="characters-title">Personagens</h2>
+          <p class="section__subtitle">Os tripulantes e personagens do universo One Piece</p>
+        </header>
+
+        <div class="search-bar" role="search">
+          <label for="character-search" class="sr-only">Buscar personagem</label>
+          <input
+            type="search"
+            id="character-search"
+            class="search-bar__input"
+            placeholder="Buscar por nome, função ou tripulação…"
+            autocomplete="off"
+          >
+          <button class="search-bar__btn" aria-label="Buscar">🔍</button>
+        </div>
+
+        <div class="cards-grid" id="characters-grid" role="list" aria-live="polite" aria-label="Lista de personagens">
+          <!-- Renderizado via JS -->
+        </div>
+
+        <button class="btn-load-more" id="load-more-characters" hidden>
+          Carregar mais personagens
+        </button>
+      </div>
+    </section>
+
+    <!-- ── AKUMA NO MI (DEVIL FRUITS) ───────────────────── -->
+    <section class="section section--alt" id="fruits" aria-labelledby="fruits-title">
+      <div class="container">
+        <header class="section__header">
+          <h2 class="section__title" id="fruits-title">Akuma no Mi</h2>
+          <p class="section__subtitle">As Frutas do Diabo e seus poderes sobrenaturais</p>
+        </header>
+
+        <div class="filter-bar" role="group" aria-label="Filtrar por tipo de fruta">
+          <button class="filter-btn filter-btn--active" data-filter="all">Todas</button>
+          <button class="filter-btn" data-filter="Paramecia">Paramecia</button>
+          <button class="filter-btn" data-filter="Zoan">Zoan</button>
+          <button class="filter-btn" data-filter="Logia">Logia</button>
+        </div>
+
+        <div class="cards-grid" id="fruits-grid" role="list" aria-live="polite" aria-label="Lista de Akuma no Mi">
+          <!-- Renderizado via JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ── TRIPULAÇÕES ──────────────────────────────────── -->
+    <section class="section" id="crews" aria-labelledby="crews-title">
+      <div class="container">
+        <header class="section__header">
+          <h2 class="section__title" id="crews-title">Tripulações</h2>
+          <p class="section__subtitle">As tripulações piratas mais famosas dos sete mares</p>
+        </header>
+
+        <div class="cards-grid cards-grid--crews" id="crews-grid" role="list" aria-live="polite" aria-label="Lista de tripulações">
+          <!-- Renderizado via JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ── SAGAS ────────────────────────────────────────── -->
+    <section class="section section--alt" id="sagas" aria-labelledby="sagas-title">
+      <div class="container">
+        <header class="section__header">
+          <h2 class="section__title" id="sagas-title">Sagas</h2>
+          <p class="section__subtitle">A jornada épica de Monkey D. Luffy rumo ao tesouro lendário</p>
+        </header>
+
+        <ol class="sagas-timeline" id="sagas-timeline" aria-label="Linha do tempo das sagas">
+          <!-- Renderizado via JS -->
+        </ol>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ═══════════════════════════════════════════════════════
+       FOOTER
+  ═══════════════════════════════════════════════════════ -->
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer__grid">
+        <div class="footer__brand">
+          <a href="#home" class="logo logo--footer" aria-label="One Piece Wiki — voltar ao topo">
+            <span class="logo__icon" aria-hidden="true">☠</span>
+            <span class="logo__text">One Piece</span>
+          </a>
+          <p>
+            Explore o universo criado por Eiichiro Oda, publicado pela
+            <em>Shueisha</em> desde 1997 no Weekly Shōnen Jump.
+          </p>
+        </div>
+
+        <nav class="footer__nav" aria-label="Links rápidos">
+          <h3>Explorar</h3>
+          <ul>
+            <li><a href="#characters">Personagens</a></li>
+            <li><a href="#fruits">Akuma no Mi</a></li>
+            <li><a href="#crews">Tripulações</a></li>
+            <li><a href="#sagas">Sagas</a></li>
+          </ul>
+        </nav>
+
+        <nav class="footer__nav" aria-label="Recursos externos">
+          <h3>Recursos</h3>
+          <ul>
+            <li><a href="https://api-onepiece.com" target="_blank" rel="noopener noreferrer">One Piece API</a></li>
+            <li><a href="https://onepiece.com" target="_blank" rel="noopener noreferrer">Site Oficial</a></li>
+          </ul>
+        </nav>
+      </div>
+
+      <div class="footer__bottom">
+        <p>One Piece &copy; Eiichiro Oda / Shueisha. Site fan-made para fins educacionais.</p>
+        <p>Dados: <a href="https://api-onepiece.com" target="_blank" rel="noopener noreferrer">api-onepiece.com</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Botão voltar ao topo -->
+  <button class="back-to-top" id="back-to-top" aria-label="Voltar ao topo" hidden>↑</button>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
