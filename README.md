@@ -5,7 +5,7 @@ Uma wiki interativa do universo **One Piece**, consumindo a [api-onepiece.com](h
 <img width="1919" height="1029" alt="image" src="https://github.com/user-attachments/assets/1ad56672-3948-4508-8d6a-8ece9f32a69d" />
 
 
----
+
 
 ## Funcionalidades
 
@@ -18,7 +18,6 @@ Uma wiki interativa do universo **One Piece**, consumindo a [api-onepiece.com](h
 - **Animações** — fade-in com Intersection Observer e skeletons de carregamento
 - **Acessibilidade** — roles ARIA, labels e navegação por teclado
 
----
 
 ## Tecnologias
 
@@ -79,51 +78,6 @@ http-server .
 
 > **Nota:** A aplicação consome a API `https://api.api-onepiece.com/v2`. Certifique-se de estar conectado à internet.
 
----
-
-## Estrutura do projeto
-
-```
-One_piece_project_jeofton/
-├── index.html        # Estrutura HTML da aplicação
-├── css/
-│   └── style.css     # Estilos — design system, layout, componentes
-└── js/
-    └── app.js        # Lógica — integração com API, renderização, eventos
-```
-
----
-
-## Capturas de tela
-
-| Seção | Descrição |
-|-------|-----------|
-| Hero | Banner com estatísticas do universo carregadas da API |
-| Personagens | Grid com busca e paginação |
-| Akuma no Mi | Cards com filtro por tipo de fruta |
-| Tripulações | Cards com destaque para Yonko |
-| Sagas | Linha do tempo cronológica |
-
----
-
-## API utilizada
-
-[**api-onepiece.com**](https://api.api-onepiece.com/v2) — API pública e gratuita com dados do universo One Piece.
-
-Endpoints consumidos:
-
-```
-GET /v2/characters/en
-GET /v2/fruits/en
-GET /v2/crews/en
-GET /v2/sagas/en
-GET /v2/characters/en/count
-GET /v2/fruits/en/count
-GET /v2/crews/en/count
-GET /v2/sagas/en/count
-```
-
----
 
 ## Créditos
 
