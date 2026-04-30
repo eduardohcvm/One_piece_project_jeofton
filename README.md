@@ -1,6 +1,15 @@
 # ☠ One Piece Wiki — O Mundo dos Piratas
 
-Projeto de treinamento desenvolvido durante as aulas com o Prof. Jeofton Costa.  
+
+
+Este projeto consiste no desenvolvimento de um site temático inspirado no
+universo de One Piece, com o objetivo de apresentar e explicar alguns personagens
+fictícios da obra,  A proposta é
+criar uma experiência informativa e visualmente agradável para os fãs, reunindo
+curiosidades, descrições e elementos marcantes de cada local de forma divertida e
+interativa. 
+
+
 Uma wiki interativa do universo **One Piece**, consumindo a [api-onepiece.com](https://api.api-onepiece.com/v2) para exibir personagens, Akuma no Mi, tripulações e sagas.
 <img width="1919" height="1029" alt="image" src="https://github.com/user-attachments/assets/1ad56672-3948-4508-8d6a-8ece9f32a69d" />
 
