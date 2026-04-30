@@ -55,16 +55,6 @@ git clone https://github.com/eduardohcvm/One_piece_project_jeofton.git
 
 # Acesse a pasta
 cd One_piece_project_jeofton
-
-# Abra o arquivo no navegador
-# Windows
-start index.html
-
-# macOS
-open index.html
-
-# Linux
-xdg-open index.html
 ```
 
 ### Opção 2 — Live Server (recomendado para desenvolvimento)
@@ -76,17 +66,6 @@ Se usar **VS Code**, instale a extensão [Live Server](https://marketplace.visua
 3. Selecione **"Open with Live Server"**
 4. O navegador abrirá em `http://127.0.0.1:5500`
 
-### Opção 3 — http-server (Node.js)
-
-```bash
-# Instale o servidor (apenas uma vez)
-npm install -g http-server
-
-# Execute na raiz do projeto
-http-server .
-
-# Acesse em http://localhost:8080
-```
 
 > **Nota:** A aplicação consome a API `https://api.api-onepiece.com/v2`. Certifique-se de estar conectado à internet.
 
