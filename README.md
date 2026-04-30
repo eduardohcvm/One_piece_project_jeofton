@@ -1,5 +1,5 @@
 # ☠ One Piece Wiki — O Mundo dos Piratas
-
+Projeto de: Eduardo Henrique Calado Vieira de Melo e Jean Icaro Lima de Oliveira
 
 
 Este projeto consiste no desenvolvimento de um site temático inspirado no
