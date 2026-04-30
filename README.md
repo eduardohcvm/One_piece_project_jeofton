@@ -13,6 +13,9 @@ interativa.
 Uma wiki interativa do universo **One Piece**, consumindo a [api-onepiece.com](https://api.api-onepiece.com/v2) para exibir personagens, Akuma no Mi, tripulações e sagas.
 <img width="1919" height="1029" alt="image" src="https://github.com/user-attachments/assets/1ad56672-3948-4508-8d6a-8ece9f32a69d" />
 
+wireframe
+<img width="769" height="528" alt="{B7D5961A-ECBE-4A05-B6CD-D28F1433C291}" src="https://github.com/user-attachments/assets/3ca59b85-e89f-4b32-8d84-d081bad53e29" />
+
 
 
 
