@@ -12,8 +12,7 @@
 </head>
 <body>
 
-
-  
+  <!-- ── HEADER ──────────────────────────────────────────── -->
   <header class="header" id="header">
     <div class="container header__inner">
       <a href="#home" class="logo" aria-label="One Piece Wiki — voltar ao topo">
@@ -38,9 +37,7 @@
     </div>
   </header>
 
-
-
-  
+  <!-- ── HERO ────────────────────────────────────────────── -->
   <section class="hero" id="home" aria-label="Introdução">
     <div class="hero__bg" aria-hidden="true">
       <div class="hero__bg-waves"></div>
@@ -90,10 +87,10 @@
     <div class="hero__scroll" aria-hidden="true">↓</div>
   </section>
 
-
+  <!-- ── CONTEÚDO PRINCIPAL ──────────────────────────────── -->
   <main id="main-content">
 
-    <!-- ── PERSONAGENS ──────────────────────────────────── -->
+    <!-- PERSONAGENS -->
     <section class="section" id="characters" aria-labelledby="characters-title">
       <div class="container">
         <header class="section__header">
@@ -123,7 +120,7 @@
       </div>
     </section>
 
-    
+    <!-- AKUMA NO MI -->
     <section class="section section--alt" id="fruits" aria-labelledby="fruits-title">
       <div class="container">
         <header class="section__header">
@@ -144,7 +141,7 @@
       </div>
     </section>
 
-    <!-- ── TRIPULAÇÕES ──── -->
+    <!-- TRIPULAÇÕES -->
     <section class="section" id="crews" aria-labelledby="crews-title">
       <div class="container">
         <header class="section__header">
@@ -153,12 +150,12 @@
         </header>
 
         <div class="cards-grid cards-grid--crews" id="crews-grid" role="list" aria-live="polite" aria-label="Lista de tripulações">
-          
+          <!-- Renderizado via JS -->
         </div>
       </div>
     </section>
 
-    <!-- ── SAGAS ────────────────────────────────────────── -->
+    <!-- SAGAS -->
     <section class="section section--alt" id="sagas" aria-labelledby="sagas-title">
       <div class="container">
         <header class="section__header">
@@ -173,6 +170,75 @@
     </section>
 
   </main>
+
+  <!-- ── FOOTER ───────────────────────────────────────────── -->
+  <footer class="footer" id="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer__grid">
+
+        <!-- Marca -->
+        <div class="footer__brand">
+          <div class="footer__skull" aria-hidden="true">☠</div>
+          <a href="#home" class="logo logo--footer" aria-label="One Piece Wiki — voltar ao topo">
+            <span class="logo__icon" aria-hidden="true">☠</span>
+            <span class="logo__text">One Piece Wiki</span>
+          </a>
+          <p>
+            Explore o universo épico de Eiichiro Oda — personagens lendários,
+            Akuma no Mi misteriosas, tripulações poderosas e sagas inesquecíveis
+            no Grand Line.
+          </p>
+          <div class="footer__social" aria-label="Links da comunidade">
+            <a href="https://api.api-onepiece.com/v2" class="footer__social-link" target="_blank" rel="noopener noreferrer">
+              🔌 API
+            </a>
+            <a href="https://onepiece.fandom.com" class="footer__social-link" target="_blank" rel="noopener noreferrer">
+              📖 Wiki Fandom
+            </a>
+            <a href="https://www.viz.com/one-piece" class="footer__social-link" target="_blank" rel="noopener noreferrer">
+              📚 Mangá
+            </a>
+          </div>
+        </div>
+
+        <!-- Explorar -->
+        <nav class="footer__nav" aria-label="Explorar o universo">
+          <h3>Explorar</h3>
+          <ul>
+            <li><a href="#characters">⚔️ Personagens</a></li>
+            <li><a href="#fruits">🍎 Akuma no Mi</a></li>
+            <li><a href="#crews">🏴 Tripulações</a></li>
+            <li><a href="#sagas">📖 Sagas</a></li>
+          </ul>
+        </nav>
+
+        <!-- Recursos -->
+        <nav class="footer__nav" aria-label="Recursos externos">
+          <h3>Recursos</h3>
+          <ul>
+            <li><a href="https://api.api-onepiece.com/v2" target="_blank" rel="noopener noreferrer">API One Piece</a></li>
+            <li><a href="https://onepiece.fandom.com" target="_blank" rel="noopener noreferrer">Wiki Fandom</a></li>
+            <li><a href="https://www.viz.com/one-piece" target="_blank" rel="noopener noreferrer">Mangá Oficial</a></li>
+            <li><a href="https://www.shueisha.co.jp/" target="_blank" rel="noopener noreferrer">Shueisha</a></li>
+          </ul>
+        </nav>
+
+      </div>
+
+      <!-- Barra inferior -->
+      <div class="footer__bottom">
+        <p>
+          © 2025 One Piece Wiki — Projeto educacional.
+          One Piece é propriedade de
+          <a href="https://www.shueisha.co.jp/" target="_blank" rel="noopener noreferrer">Eiichiro Oda / Shueisha</a>.
+        </p>
+        <p>
+          Desenvolvido por <a href="#home">Prof. Jeofton Costa</a>
+          · Dados via <a href="https://api.api-onepiece.com/v2" target="_blank" rel="noopener noreferrer">API One Piece v2</a>
+        </p>
+      </div>
+    </div>
+  </footer>
 
   <!-- Botão voltar ao topo -->
   <button class="back-to-top" id="back-to-top" aria-label="Voltar ao topo" hidden>↑</button>

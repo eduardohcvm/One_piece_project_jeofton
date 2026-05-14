@@ -1,0 +1,173 @@
+/* ── HERO ───────────────────────────────────────────────────── */
+.hero {
+  position: relative;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  padding-block-start: var(--header-h);
+}
+
+/* Fundo decorativo */
+.hero__bg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 70% 60% at 15% 55%, rgba(14 77 110 / 0.45) 0%, transparent 65%),
+    radial-gradient(ellipse 50% 40% at 85% 20%, rgba(230 57 70 / 0.2)  0%, transparent 55%),
+    radial-gradient(ellipse 60% 50% at 50% 100%, rgba(245 197 24 / 0.07) 0%, transparent 50%),
+    linear-gradient(170deg, var(--clr-bg) 0%, #0d1825 55%, var(--clr-bg) 100%);
+}
+
+.hero__bg::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle, rgba(255 255 255 / 0.06) 1px, transparent 1px);
+  background-size: 36px 36px;
+  mask-image: radial-gradient(ellipse 80% 80% at center, black 30%, transparent 75%);
+  -webkit-mask-image: radial-gradient(ellipse 80% 80% at center, black 30%, transparent 75%);
+}
+
+.hero__bg-waves {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 120px;
+  background:
+    repeating-linear-gradient(
+      90deg,
+      transparent 0,
+      transparent 40px,
+      rgba(14 77 110 / 0.08) 40px,
+      rgba(14 77 110 / 0.08) 80px
+    );
+  mask-image: linear-gradient(to top, black, transparent);
+  -webkit-mask-image: linear-gradient(to top, black, transparent);
+}
+
+.hero__bg-skull {
+  position: absolute;
+  right: -4%;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: var(--fs-skull);
+  line-height: 1;
+  opacity: 0.035;
+  user-select: none;
+}
+
+/* Conteúdo do hero */
+.hero__content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-md);
+  padding-block: var(--space-xl);
+  max-width: 680px;
+}
+
+.hero__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem var(--space-sm);
+  background: rgba(245 197 24 / 0.1);
+  border: 1px solid rgba(245 197 24 / 0.3);
+  border-radius: var(--radius-full);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  color: var(--clr-gold);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.hero__title {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.hero__title-main {
+  font-family: 'Cinzel', Georgia, serif;
+  font-size: var(--fs-h1);
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  line-height: 0.92;
+  background: linear-gradient(135deg, var(--clr-gold) 0%, var(--clr-gold-dark) 35%, var(--clr-gold) 65%, var(--clr-gold-light) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 0 32px rgba(245 197 24 / 0.4));
+}
+
+.hero__title-sub {
+  font-size: var(--fs-lg);
+  font-weight: 400;
+  color: var(--clr-text-muted);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  padding-left: 0.1em;
+}
+
+.hero__description {
+  font-size: var(--fs-base);
+  color: var(--clr-text-muted);
+  line-height: 1.75;
+  max-width: 520px;
+}
+
+/* Botões CTA */
+.hero__cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+}
+
+/* Estatísticas do hero */
+.hero__stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-lg);
+  padding-block-start: var(--space-sm);
+  border-top: 1px solid var(--clr-border);
+  width: 100%;
+}
+
+.stat-item { display: flex; flex-direction: column; gap: 0.2rem; }
+
+.stat-item__number {
+  font-family: 'Cinzel', serif;
+  font-size: var(--fs-stat);
+  font-weight: 700;
+  color: var(--clr-gold);
+  line-height: 1;
+}
+
+.stat-item__label {
+  font-size: var(--fs-sm);
+  color: var(--clr-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+/* Ícone de scroll */
+.hero__scroll {
+  position: absolute;
+  bottom: var(--space-lg);
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: var(--fs-lg);
+  color: var(--clr-text-dim);
+  animation: bounce 2.2s ease-in-out infinite;
+  user-select: none;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50%       { transform: translateX(-50%) translateY(9px); }
+}
