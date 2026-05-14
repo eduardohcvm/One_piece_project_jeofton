@@ -1,23 +1,10 @@
 /* ================================================================
    ONE PIECE WIKI — STYLE.CSS
-   Arquivo de entrada: importa todos os módulos na ordem correta.
+   Arquivo de entrada — importa os módulos na ordem correta.
    Prof. Jeofton Costa — Aula 7: Layout Moderno e Responsividade
    ================================================================ */
 
-/* 1. Tokens de design (variáveis CSS) */
-@import url('tokens.css');
-
-/* 2. Reset e estilos base */
-@import url('reset.css');
-
-/* 3. Componentes */
-@import url('components/header.css');
-@import url('components/hero.css');
-@import url('components/sections.css');
-@import url('components/cards.css');
-@import url('components/timeline.css');
-@import url('components/footer.css');
-@import url('components/ui.css');
-
-/* 4. Media queries responsivas */
-@import url('responsive.css');
+@import url('tokens.css');      /* 1. Tokens de design (variáveis) */
+@import url('base.css');        /* 2. Reset, utilitários e UI global */
+@import url('components.css');  /* 3. Componentes: header, hero, cards, footer… */
+@import url('responsive.css');  /* 4. Media queries */
