@@ -154,7 +154,7 @@
 @keyframes bounce { 0%, 100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(9px); } }
 
 /* ── SEÇÕES ────────────────────────────────────────────────── */
-.section { padding-block: var(--space-xl); }
+.section { padding-block: var(--space-xl); container-type: inline-size; container-name: section-ct; }
 .section--alt { background: var(--clr-surface); }
 .section__header { text-align: center; margin-block-end: var(--space-xl); }
 .section__title {
@@ -198,7 +198,7 @@
 .filter-btn[data-filter="Zoan"].filter-btn--active      { background: var(--clr-zoan);      border-color: var(--clr-zoan);      color: var(--clr-text); }
 .filter-btn[data-filter="Logia"].filter-btn--active     { background: var(--clr-logia);     border-color: var(--clr-logia);     color: var(--clr-text); }
 
-.cards-grid { display: grid; grid-template-columns: 1fr; gap: var(--space-md); }
+.cards-grid { display: grid; grid-template-columns: 1fr; gap: var(--space-md); container-type: inline-size; container-name: cards-ct; }
 
 /* ── CARDS ─────────────────────────────────────────────────── */
 .char-card, .fruit-card, .crew-card {
