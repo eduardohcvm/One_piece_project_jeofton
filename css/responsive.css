@@ -1,0 +1,92 @@
+/* ================================================================
+   ONE PIECE WIKI — RESPONSIVE.CSS
+   Mobile-First: base = mobile, depois tablet ≥768px,
+   desktop ≥1024px, extra-large ≥1280px, projetor ≥1600px
+   Container Queries substituem media queries nos cards grid.
+   ================================================================ */
+
+/* ── TABLET ≥ 768px ────────────────────────────────────────── */
+@media (min-width: 768px) {
+
+  .container { padding-inline: var(--space-lg); }
+
+  /* Header: hamburger some, nav fica inline */
+  .hamburger { display: none; }
+
+  .nav {
+    position: static;
+    transform: none !important;
+    background: none;
+    padding: 0;
+    border: none;
+    backdrop-filter: none;
+    z-index: auto;
+  }
+
+  .nav__links {
+    flex-direction: row;
+    gap: 0.25rem;
+  }
+
+  .nav__link {
+    padding: var(--space-xs) 0.875rem;
+    font-size: var(--fs-sm);
+  }
+
+  /* Hero: conteúdo respira mais */
+  .hero__content { padding-block: var(--space-2xl); }
+
+  /* Timeline */
+  .sagas-timeline::before { left: 24px; }
+
+  /* Footer: 3 colunas */
+  .footer__grid { grid-template-columns: 2fr 1fr 1fr; }
+
+  .footer__bottom {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+/* ── DESKTOP ≥ 1024px ──────────────────────────────────────── */
+@media (min-width: 1024px) {
+  .section { padding-block: var(--space-2xl); }
+  .sagas-timeline::before { left: 28px; }
+}
+
+/* ── EXTRA LARGE ≥ 1280px ──────────────────────────────────── */
+@media (min-width: 1280px) {
+  .container { padding-inline: var(--space-xl); }
+}
+
+/* ── PROJETOR ≥ 1600px — Legibilidade aumentada ────────────── */
+@media (min-width: 1600px) {
+  :root { font-size: clamp(16px, 1.1vw, 20px); }
+}
+
+/* ── CONTAINER QUERIES — Cards Grid ────────────────────────── */
+/* Reage ao tamanho da seção pai, independente do viewport     */
+@container section-ct (min-width: 580px) {
+  .cards-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@container section-ct (min-width: 860px) {
+  .cards-grid        { grid-template-columns: repeat(3, 1fr); }
+  .cards-grid--crews { grid-template-columns: repeat(2, 1fr); }
+}
+
+@container section-ct (min-width: 1140px) {
+  .cards-grid        { grid-template-columns: repeat(4, 1fr); }
+  .cards-grid--crews { grid-template-columns: repeat(3, 1fr); }
+}
+
+/* ── Preferências de acessibilidade ───────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  html { scroll-behavior: auto; }
+}

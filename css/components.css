@@ -1,0 +1,539 @@
+/* ================================================================
+   ONE PIECE WIKI — COMPONENTS.CSS
+   Header, Hero, Seções, Cards, Timeline e Footer.
+   ================================================================ */
+
+/**
+ * @component Header
+ * @description Cabeçalho fixo com logo, hambúrguer mobile e navegação
+ *   principal. Transiciona para fundo opaco ao rolar a página.
+ *
+ * @tokens-consumed
+ *   --header-h              Altura fixa do cabeçalho
+ *   --header-bg             Fundo semitransparente padrão
+ *   --header-bg-scrolled    Fundo opaco ao rolar
+ *   --nav-bg                Fundo do menu mobile
+ *   --clr-border            Linha divisória inferior
+ *   --clr-gold / --glow-gold  Cor e brilho do logo
+ *   --clr-text / --clr-text-muted  Texto dos links
+ *   --clr-surface-2         Hover do hamburger
+ *   --fs-logo / --fs-logo-sm / --fs-icon  Tipografia do logo
+ *   --fs-sm / --fs-base     Tipografia dos links
+ *   --hamburger-size        Tamanho do botão hambúrguer
+ *   --space-xs / --space-sm / --space-md  Espaçamentos
+ *   --radius-sm / --radius-xs / --radius-full  Bordas
+ *   --ease-base / --ease-fast  Transições
+ *
+ * @states
+ *   default               Fundo semitransparente com blur
+ *   .header--scrolled     Fundo opaco + sombra
+ *   .hamburger--open      Spans formam X (menu aberto)
+ *   .nav--open            Menu mobile desce para y=0
+ *   .nav__link:hover      Dourado + fundo sutil
+ *   .nav__link--active    Link da seção visível no viewport
+ *
+ * @variants
+ *   .logo--footer   Logo menor para uso no rodapé
+ *
+ * @since Aula 07 | @updated Aula 12
+ */
+/* ── HEADER ────────────────────────────────────────────────── */
+.header {
+  position: fixed;
+  inset-block-start: 0;
+  inset-inline: 0;
+  z-index: 200;
+  height: var(--header-h);
+  background: var(--header-bg);
+  backdrop-filter: blur(16px) saturate(1.4);
+  -webkit-backdrop-filter: blur(16px) saturate(1.4);
+  border-bottom: 1px solid var(--clr-border);
+  transition: background var(--ease-base), box-shadow var(--ease-base);
+}
+.header--scrolled { background: var(--header-bg-scrolled); box-shadow: var(--shadow-md); }
+.header__inner { height: 100%; display: flex; align-items: center; justify-content: space-between; gap: var(--space-sm); }
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  font-family: 'Cinzel', Georgia, serif;
+  font-weight: 900;
+  font-size: var(--fs-logo);
+  color: var(--clr-gold);
+  text-shadow: var(--glow-gold);
+  transition: filter var(--ease-fast), transform var(--ease-fast);
+  flex-shrink: 0;
+}
+.logo:hover { filter: brightness(1.15); transform: scale(1.02); }
+.logo__icon   { font-size: var(--fs-icon); line-height: 1; }
+.logo--footer { font-size: var(--fs-logo-sm); }
+
+.hamburger {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: var(--hamburger-size);
+  height: var(--hamburger-size);
+  padding: var(--space-xs);
+  border-radius: var(--radius-sm);
+  transition: background var(--ease-fast);
+}
+.hamburger:hover { background: var(--clr-surface-2); }
+.hamburger span {
+  display: block; width: 100%; height: 2px;
+  background: var(--clr-text); border-radius: var(--radius-xs);
+  transition: transform var(--ease-base), opacity var(--ease-base);
+  transform-origin: center;
+}
+.hamburger--open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.hamburger--open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.hamburger--open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+.nav {
+  position: fixed;
+  inset-block-start: var(--header-h);
+  inset-inline: 0;
+  background: var(--nav-bg);
+  backdrop-filter: blur(16px);
+  padding: var(--space-md) var(--space-sm);
+  border-bottom: 1px solid var(--clr-border);
+  transform: translateY(-110%);
+  transition: transform var(--ease-base);
+  z-index: 199;
+}
+.nav--open { transform: translateY(0); }
+.nav__links { display: flex; flex-direction: column; gap: 0.25rem; }
+.nav__link {
+  display: block;
+  padding: 0.625rem var(--space-sm);
+  font-size: var(--fs-base);
+  font-weight: 500;
+  color: var(--clr-text-muted);
+  border-radius: var(--radius-sm);
+  transition: color var(--ease-fast), background var(--ease-fast);
+}
+.nav__link:hover, .nav__link--active { color: var(--clr-gold); background: rgba(245 197 24 / 0.08); }
+
+/**
+ * @component Hero
+ * @description Seção de entrada full-viewport com gradiente oceânico,
+ *   caveira decorativa, badge, título animado, descrição, CTAs e
+ *   estatísticas carregadas via JS.
+ *
+ * @tokens-consumed
+ *   --clr-bg / --clr-gold / --clr-gold-dark / --clr-gold-light
+ *   --clr-text-muted / --clr-text-dim / --clr-border
+ *   --fs-h1 / --fs-lg / --fs-sm / --fs-base / --fs-stat / --fs-skull
+ *   --space-md / --space-lg / --space-xl / --space-2xl / --space-sm
+ *   --header-h    Padding-top para compensar header fixo
+ *   --glow-gold   Sombra de texto no título
+ *   --ease-fast / --radius-full
+ *
+ * @states
+ *   default   Animação de bounce contínua no indicador de scroll
+ *
+ * @since Aula 07 | @updated Aula 12
+ */
+/* ── HERO ──────────────────────────────────────────────────── */
+.hero {
+  position: relative;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  padding-block-start: var(--header-h);
+}
+
+.hero__bg {
+  position: absolute; inset: 0; pointer-events: none;
+  background:
+    radial-gradient(ellipse 70% 60% at 15% 55%, rgba(14 77 110 / 0.45) 0%, transparent 65%),
+    radial-gradient(ellipse 50% 40% at 85% 20%, rgba(230 57 70 / 0.2) 0%, transparent 55%),
+    radial-gradient(ellipse 60% 50% at 50% 100%, rgba(245 197 24 / 0.07) 0%, transparent 50%),
+    linear-gradient(170deg, var(--clr-bg) 0%, #0d1825 55%, var(--clr-bg) 100%);
+}
+.hero__bg::before {
+  content: ''; position: absolute; inset: 0;
+  background-image: radial-gradient(circle, rgba(255 255 255 / 0.06) 1px, transparent 1px);
+  background-size: 36px 36px;
+  mask-image: radial-gradient(ellipse 80% 80% at center, black 30%, transparent 75%);
+  -webkit-mask-image: radial-gradient(ellipse 80% 80% at center, black 30%, transparent 75%);
+}
+.hero__bg-waves {
+  position: absolute; bottom: 0; left: 0; right: 0; height: 120px;
+  background: repeating-linear-gradient(90deg, transparent 0, transparent 40px, rgba(14 77 110 / 0.08) 40px, rgba(14 77 110 / 0.08) 80px);
+  mask-image: linear-gradient(to top, black, transparent);
+  -webkit-mask-image: linear-gradient(to top, black, transparent);
+}
+.hero__bg-skull {
+  position: absolute; right: -4%; top: 50%;
+  transform: translateY(-50%);
+  font-size: var(--fs-skull); line-height: 1; opacity: 0.035; user-select: none;
+}
+
+.hero__content {
+  position: relative; z-index: 1;
+  display: flex; flex-direction: column; align-items: flex-start;
+  gap: var(--space-md); padding-block: var(--space-xl); max-width: 680px;
+}
+.hero__badge {
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  padding: 0.4rem var(--space-sm);
+  background: rgba(245 197 24 / 0.1); border: 1px solid rgba(245 197 24 / 0.3);
+  border-radius: var(--radius-full); font-size: var(--fs-sm); font-weight: 600;
+  color: var(--clr-gold); letter-spacing: 0.08em; text-transform: uppercase;
+}
+.hero__title { display: flex; flex-direction: column; gap: 0.2rem; }
+.hero__title-main {
+  font-family: 'Cinzel', Georgia, serif; font-size: var(--fs-h1); font-weight: 900;
+  letter-spacing: -0.02em; line-height: 0.92;
+  background: linear-gradient(135deg, var(--clr-gold) 0%, var(--clr-gold-dark) 35%, var(--clr-gold) 65%, var(--clr-gold-light) 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  filter: drop-shadow(0 0 32px rgba(245 197 24 / 0.4));
+}
+.hero__title-sub { font-size: var(--fs-lg); font-weight: 400; color: var(--clr-text-muted); letter-spacing: 0.18em; text-transform: uppercase; padding-left: 0.1em; }
+.hero__description { font-size: var(--fs-base); color: var(--clr-text-muted); line-height: 1.75; max-width: 520px; }
+.hero__cta { display: flex; flex-wrap: wrap; gap: var(--space-sm); }
+.hero__stats { display: flex; flex-wrap: wrap; gap: var(--space-lg); padding-block-start: var(--space-sm); border-top: 1px solid var(--clr-border); width: 100%; }
+.stat-item { display: flex; flex-direction: column; gap: 0.2rem; }
+.stat-item__number { font-family: 'Cinzel', serif; font-size: var(--fs-stat); font-weight: 700; color: var(--clr-gold); line-height: 1; }
+.stat-item__label  { font-size: var(--fs-sm); color: var(--clr-text-muted); text-transform: uppercase; letter-spacing: 0.1em; }
+.hero__scroll {
+  position: absolute; bottom: var(--space-lg); left: 50%; transform: translateX(-50%);
+  font-size: var(--fs-lg); color: var(--clr-text-dim);
+  animation: bounce 2.2s ease-in-out infinite; user-select: none;
+}
+@keyframes bounce { 0%, 100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(9px); } }
+
+/**
+ * @component Section / SearchBar / FilterBar / CardsGrid
+ * @description Wrapper de seção com container query (container-name:
+ *   section-ct), barra de busca, filtros por tipo e grid responsivo.
+ *   O grid muda de 1→2→3→4 colunas via @container em responsive.css.
+ *
+ * @tokens-consumed
+ *   --clr-surface / --clr-surface-2 / --clr-border / --clr-border-hover
+ *   --clr-text / --clr-text-muted / --clr-text-dim
+ *   --clr-gold / --clr-gold-dark / --clr-bg / --clr-red
+ *   --clr-paramecia / --clr-zoan / --clr-logia
+ *   --fs-h2 / --fs-base / --fs-sm
+ *   --search-btn-size / --space-xs / --space-sm / --space-md / --space-lg / --space-xl
+ *   --radius-full / --radius-sm / --ease-fast
+ *
+ * @states
+ *   .search-bar__input:focus    Borda dourada + anel de foco suave
+ *   .filter-btn:hover           Borda mais visível
+ *   .filter-btn--active         Fundo colorido pelo tipo selecionado
+ *   [data-filter="Paramecia"]   Roxo (--clr-paramecia)
+ *   [data-filter="Zoan"]        Verde (--clr-zoan)
+ *   [data-filter="Logia"]       Laranja (--clr-logia)
+ *
+ * @since Aula 08 | @updated Aula 12
+ */
+/* ── SEÇÕES ────────────────────────────────────────────────── */
+.section { padding-block: var(--space-xl); container-type: inline-size; container-name: section-ct; }
+.section--alt { background: var(--clr-surface); }
+.section__header { text-align: center; margin-block-end: var(--space-xl); }
+.section__title {
+  font-family: 'Cinzel', serif; font-size: var(--fs-h2); font-weight: 700;
+  color: var(--clr-text); display: inline-block; position: relative;
+}
+.section__title::after {
+  content: ''; display: block; width: 55%; height: 3px;
+  margin: var(--space-xs) auto 0; border-radius: var(--radius-full);
+  background: linear-gradient(90deg, var(--clr-gold), var(--clr-red));
+}
+.section__subtitle { margin-block-start: var(--space-xs); color: var(--clr-text-muted); font-size: var(--fs-base); }
+
+.search-bar { display: flex; gap: var(--space-xs); max-width: 520px; margin-inline: auto; margin-block-end: var(--space-lg); }
+.search-bar__input {
+  flex: 1; min-width: 0; padding: 0.75rem var(--space-sm);
+  background: var(--clr-surface-2); border: 1.5px solid var(--clr-border);
+  border-radius: var(--radius-full); color: var(--clr-text);
+  transition: border-color var(--ease-fast), box-shadow var(--ease-fast);
+}
+.search-bar__input:focus { outline: none; border-color: var(--clr-gold); box-shadow: 0 0 0 3px rgba(245 197 24 / 0.14); }
+.search-bar__input::placeholder { color: var(--clr-text-dim); }
+.search-bar__btn {
+  width: var(--search-btn-size); height: var(--search-btn-size); flex-shrink: 0;
+  border-radius: var(--radius-full); background: var(--clr-gold); color: var(--clr-bg);
+  font-size: var(--fs-base); display: flex; align-items: center; justify-content: center;
+  transition: background var(--ease-fast), transform var(--ease-fast);
+}
+.search-bar__btn:hover { background: var(--clr-gold-dark); transform: scale(1.06); }
+
+.filter-bar { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--space-xs); margin-block-end: var(--space-lg); }
+.filter-btn {
+  padding: var(--space-xs) 1.125rem; border-radius: var(--radius-full);
+  font-size: var(--fs-sm); font-weight: 600; color: var(--clr-text-muted);
+  background: var(--clr-surface-2); border: 1.5px solid var(--clr-border);
+  text-transform: uppercase; letter-spacing: 0.06em; transition: all var(--ease-fast);
+}
+.filter-btn:hover    { border-color: var(--clr-border-hover); color: var(--clr-text); }
+.filter-btn--active  { background: var(--clr-gold); color: var(--clr-bg); border-color: var(--clr-gold); }
+.filter-btn[data-filter="Paramecia"].filter-btn--active { background: var(--clr-paramecia); border-color: var(--clr-paramecia); color: var(--clr-text); }
+.filter-btn[data-filter="Zoan"].filter-btn--active      { background: var(--clr-zoan);      border-color: var(--clr-zoan);      color: var(--clr-text); }
+.filter-btn[data-filter="Logia"].filter-btn--active     { background: var(--clr-logia);     border-color: var(--clr-logia);     color: var(--clr-text); }
+
+.cards-grid { display: grid; grid-template-columns: 1fr; gap: var(--space-md); container-type: inline-size; container-name: cards-ct; }
+
+/**
+ * @component CharCard
+ * @description Card de personagem do universo One Piece. Exibe avatar
+ *   com inicial, nome, função, badge de status vital e metadados
+ *   (tripulação, Akuma no Mi). O layout é sempre vertical; o número de
+ *   colunas do grid pai adapta via @container em responsive.css.
+ *
+ * @tokens-consumed
+ *   --clr-surface-2           Fundo do card
+ *   --clr-surface-3           Fundo das células de metadados
+ *   --clr-border              Borda padrão
+ *   --clr-text                Nome do personagem
+ *   --clr-text-muted          Função e textos secundários
+ *   --clr-text-dim            Labels uppercase dos metadados
+ *   --clr-gold                Inicial do avatar, borda hover, gradiente decorativo
+ *   --clr-red                 Gradiente da linha decorativa no topo (hover)
+ *   --clr-ocean               Gradiente de fundo do avatar
+ *   --clr-status-alive        Cor do texto de status vivo
+ *   --clr-status-dead         Cor do texto de status morto
+ *   --clr-status-unknown      Cor do texto de status desconhecido
+ *   --clr-status-alive-bg     Fundo do badge vivo
+ *   --clr-status-dead-bg      Fundo do badge morto
+ *   --clr-status-unknown-bg   Fundo do badge desconhecido
+ *   --clr-paramecia-light     Cor da tag de Akuma no Mi
+ *   --avatar-size             Diâmetro do círculo de avatar
+ *   --fs-card-title           Fonte do nome
+ *   --fs-avatar               Fonte da inicial no avatar
+ *   --fs-sm                   Textos secundários
+ *   --fs-tag                  Labels uppercase
+ *   --fs-card-meta            Valores dos metadados
+ *   --fs-status               Badge de status vital
+ *   --space-sm / --space-xs   Gaps e paddings internos
+ *   --radius-full             Avatar e badge de status
+ *   --radius-lg               Card
+ *   --radius-sm               Células de metadados e tag de fruta
+ *   --shadow-lg / --shadow-md  Sombras hover e focus
+ *   --ease-base               Transições
+ *
+ * @states
+ *   default          Fundo surface-2, borda sutil
+ *   :hover           Eleva 4px, ilumina borda dourada, revela linha top
+ *   :focus-within    Anel dourado quando filho recebe foco por teclado
+ *
+ * @variants
+ *   .char-card__status--alive    Badge verde (personagem vivo)
+ *   .char-card__status--dead     Badge vermelho (personagem morto)
+ *   .char-card__status--unknown  Badge cinza (status desconhecido)
+ *
+ * @since Aula 09 | @updated Aula 12
+ */
+
+/**
+ * @component FruitCard
+ * @description Card de Akuma no Mi com ícone temático, nome japonês,
+ *   romanização, descrição e badge de tipo (Paramecia/Zoan/Logia).
+ *   Glow colorido no hover varia por tipo.
+ *
+ * @tokens-consumed
+ *   --clr-surface-2 / --clr-surface-3 / --clr-border
+ *   --clr-text / --clr-text-muted
+ *   --clr-paramecia / --clr-paramecia-light
+ *   --clr-zoan / --clr-zoan-light
+ *   --clr-logia / --clr-logia-light
+ *   --fruit-icon-size / --fs-card-title / --fs-sm / --fs-icon / --fs-tag
+ *   --space-sm / --space-xs / --radius-lg / --radius-md / --radius-full
+ *   --shadow-lg / --ease-base
+ *
+ * @states
+ *   :hover                   Eleva 4px + sombra
+ *   :hover .fruit-card__glow Revela gradiente radial colorido por tipo
+ *   :focus-within            Anel dourado para navegação por teclado
+ *   .fruit-card--paramecia   Borda/glow roxo
+ *   .fruit-card--zoan        Borda/glow verde
+ *   .fruit-card--logia       Borda/glow laranja
+ *
+ * @since Aula 09 | @updated Aula 12
+ */
+
+/**
+ * @component CrewCard
+ * @description Card de tripulação pirata com emblema, nome, romanização,
+ *   descrição e metadados (capitão, membros, status). Variante Yonko
+ *   com borda dourada e tag "★ YONKO".
+ *
+ * @tokens-consumed
+ *   --clr-surface-2 / --clr-surface-3 / --clr-border
+ *   --clr-text / --clr-text-muted / --clr-text-dim / --clr-gold
+ *   --clr-status-alive / --clr-status-dead / --clr-status-unknown
+ *   --clr-status-alive-bg / --clr-status-dead-bg / --clr-status-unknown-bg
+ *   --emblem-size / --fs-base / --fs-sm / --fs-tag / --fs-tag-xs
+ *   --fs-card-meta / --fs-status / --fs-icon-lg
+ *   --space-sm / --space-xs / --radius-full / --radius-lg / --radius-sm
+ *   --shadow-lg / --glow-gold / --glow-red / --ease-base
+ *
+ * @states
+ *   :hover              Eleva 4px, borda vermelha suave
+ *   :focus-within       Anel dourado para navegação por teclado
+ *   .crew-card--yonko   Borda dourada + tag Yonko + gradiente sutil
+ *   .crew-status--active    Verde (tripulação ativa)
+ *   .crew-status--dead      Vermelho (tripulação dissolvida)
+ *   .crew-status--unknown   Cinza (status desconhecido)
+ *
+ * @since Aula 09 | @updated Aula 12
+ */
+/* ── CARDS ─────────────────────────────────────────────────── */
+.char-card, .fruit-card, .crew-card {
+  background: var(--clr-surface-2);
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-md);
+  display: flex; flex-direction: column; gap: var(--space-sm);
+  position: relative; overflow: hidden;
+  transition: transform var(--ease-base), box-shadow var(--ease-base), border-color var(--ease-base);
+}
+
+/* Personagem */
+.char-card::before {
+  content: ''; position: absolute; inset-block-start: 0; inset-inline: 0; height: 3px;
+  background: linear-gradient(90deg, var(--clr-gold), var(--clr-red));
+  opacity: 0; transition: opacity var(--ease-base);
+}
+.char-card:hover { transform: translateY(-4px); border-color: rgba(245 197 24 / 0.22); box-shadow: var(--shadow-lg), 0 0 40px rgba(245 197 24 / 0.08); }
+.char-card:hover::before { opacity: 1; }
+.char-card:focus-within { border-color: rgba(245 197 24 / 0.35); box-shadow: var(--shadow-md), 0 0 0 3px rgba(245 197 24 / 0.12); }
+.char-card__header { display: flex; align-items: center; gap: var(--space-sm); }
+.char-card__avatar {
+  width: var(--avatar-size); height: var(--avatar-size); border-radius: var(--radius-full);
+  background: linear-gradient(135deg, var(--clr-surface-3), var(--clr-ocean));
+  border: 2px solid var(--clr-border); display: flex; align-items: center; justify-content: center;
+  font-family: 'Cinzel', serif; font-size: var(--fs-avatar); font-weight: 700;
+  color: var(--clr-gold); flex-shrink: 0; text-transform: uppercase; user-select: none;
+}
+.char-card__info { flex: 1; min-width: 0; }
+.char-card__name { font-family: 'Cinzel', serif; font-size: var(--fs-card-title); font-weight: 700; color: var(--clr-text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.char-card__job  { font-size: var(--fs-sm); color: var(--clr-text-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-block-start: 0.15rem; }
+.char-card__status { flex-shrink: 0; padding: 0.2rem var(--space-xs); border-radius: var(--radius-full); font-size: var(--fs-status); font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; }
+.char-card__status--alive   { background: var(--clr-status-alive-bg);   color: var(--clr-status-alive); }
+.char-card__status--dead    { background: var(--clr-status-dead-bg);    color: var(--clr-status-dead); }
+.char-card__status--unknown { background: var(--clr-status-unknown-bg); color: var(--clr-status-unknown); }
+.char-card__stats { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-xs); }
+.char-card__stat { display: flex; flex-direction: column; gap: 0.15rem; padding: var(--space-xs) 0.6rem; background: var(--clr-surface-3); border-radius: var(--radius-sm); }
+.char-card__stat-label { font-size: var(--fs-tag); color: var(--clr-text-dim); text-transform: uppercase; letter-spacing: 0.1em; }
+.char-card__stat-value { font-size: var(--fs-card-meta); font-weight: 600; color: var(--clr-text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.char-card__fruit { display: flex; align-items: center; gap: var(--space-xs); padding: var(--space-xs) var(--space-sm); background: rgba(155 89 182 / 0.1); border: 1px solid rgba(155 89 182 / 0.3); border-radius: var(--radius-sm); font-size: var(--fs-sm); color: var(--clr-paramecia-light); }
+
+/* Akuma no Mi */
+.fruit-card__glow { position: absolute; inset: 0; opacity: 0; transition: opacity var(--ease-base); pointer-events: none; border-radius: inherit; }
+.fruit-card--paramecia .fruit-card__glow { background: radial-gradient(circle at 0 0, rgba(155 89 182 / 0.12), transparent 65%); }
+.fruit-card--zoan      .fruit-card__glow { background: radial-gradient(circle at 0 0, rgba(39 174 96 / 0.12), transparent 65%); }
+.fruit-card--logia     .fruit-card__glow { background: radial-gradient(circle at 0 0, rgba(230 126 34 / 0.12), transparent 65%); }
+.fruit-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+.fruit-card:hover .fruit-card__glow { opacity: 1; }
+.fruit-card:focus-within { box-shadow: var(--shadow-md), 0 0 0 3px rgba(245 197 24 / 0.12); border-color: rgba(245 197 24 / 0.3); }
+.fruit-card--paramecia:hover { border-color: rgba(155 89 182 / 0.4); }
+.fruit-card--zoan:hover      { border-color: rgba(39 174 96 / 0.4); }
+.fruit-card--logia:hover     { border-color: rgba(230 126 34 / 0.4); }
+.fruit-card__header { display: flex; align-items: flex-start; justify-content: space-between; gap: var(--space-sm); }
+.fruit-card__icon { width: var(--fruit-icon-size); height: var(--fruit-icon-size); flex-shrink: 0; border-radius: var(--radius-md); background: var(--clr-surface-3); border: 2px solid var(--clr-border); display: flex; align-items: center; justify-content: center; font-size: var(--fs-icon); user-select: none; }
+.fruit-card--paramecia .fruit-card__icon { border-color: rgba(155 89 182 / 0.5); }
+.fruit-card--zoan      .fruit-card__icon { border-color: rgba(39 174 96 / 0.5); }
+.fruit-card--logia     .fruit-card__icon { border-color: rgba(230 126 34 / 0.5); }
+.fruit-card__name  { font-family: 'Cinzel', serif; font-size: var(--fs-card-title); font-weight: 700; color: var(--clr-text); line-height: 1.3; }
+.fruit-card__roman { font-size: var(--fs-sm); color: var(--clr-text-muted); font-style: italic; margin-block-start: 0.2rem; }
+.fruit-card__desc  { font-size: var(--fs-sm); color: var(--clr-text-muted); line-height: 1.65; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+.fruit-badge { flex-shrink: 0; padding: 0.25rem 0.65rem; border-radius: var(--radius-full); font-size: var(--fs-tag); font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; white-space: nowrap; }
+.fruit-badge--paramecia { background: rgba(155 89 182 / 0.2); color: var(--clr-paramecia-light); }
+.fruit-badge--zoan      { background: rgba(39 174 96 / 0.2);  color: var(--clr-zoan-light); }
+.fruit-badge--logia     { background: rgba(230 126 34 / 0.2); color: var(--clr-logia-light); }
+
+/* Tripulação */
+.crew-card:hover { transform: translateY(-4px); border-color: rgba(230 57 70 / 0.3); box-shadow: var(--shadow-lg), 0 0 30px rgba(230 57 70 / 0.06); }
+.crew-card:focus-within { border-color: rgba(245 197 24 / 0.35); box-shadow: var(--shadow-md), 0 0 0 3px rgba(245 197 24 / 0.12); }
+.crew-card--yonko { border-color: rgba(245 197 24 / 0.25); background: linear-gradient(160deg, rgba(245 197 24 / 0.04) 0%, var(--clr-surface-2) 40%); }
+.crew-card--yonko::after { content: '★ YONKO'; position: absolute; top: var(--space-sm); right: var(--space-sm); padding: 0.18rem var(--space-xs); background: rgba(245 197 24 / 0.12); border: 1px solid rgba(245 197 24 / 0.35); border-radius: var(--radius-full); font-size: var(--fs-tag-xs); font-weight: 700; color: var(--clr-gold); letter-spacing: 0.12em; }
+.crew-card__top    { display: flex; align-items: center; gap: var(--space-sm); }
+.crew-card__emblem { width: var(--emblem-size); height: var(--emblem-size); flex-shrink: 0; border-radius: var(--radius-full); background: var(--clr-surface-3); border: 2px solid var(--clr-border); display: flex; align-items: center; justify-content: center; font-size: var(--fs-icon-lg); user-select: none; }
+.crew-card__name   { font-family: 'Cinzel', serif; font-size: var(--fs-base); font-weight: 700; color: var(--clr-text); line-height: 1.25; }
+.crew-card__roman  { font-size: var(--fs-sm); color: var(--clr-text-muted); margin-block-start: 0.2rem; }
+.crew-card__desc   { font-size: var(--fs-sm); color: var(--clr-text-muted); line-height: 1.65; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.crew-card__meta   { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-xs); }
+.crew-card__meta-item  { display: flex; flex-direction: column; gap: 0.15rem; padding: var(--space-xs) 0.6rem; background: var(--clr-surface-3); border-radius: var(--radius-sm); }
+.crew-card__meta-label { font-size: var(--fs-tag);      color: var(--clr-text-dim);  text-transform: uppercase; letter-spacing: 0.1em; }
+.crew-card__meta-value { font-size: var(--fs-card-meta); font-weight: 600; color: var(--clr-text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.crew-status { display: inline-flex; align-items: center; gap: 0.35rem; padding: 0.22rem 0.6rem; border-radius: var(--radius-full); font-size: var(--fs-status); font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; width: fit-content; }
+.crew-status::before    { content: '●'; font-size: var(--fs-tag-xs); }
+.crew-status--active    { background: var(--clr-status-alive-bg);   color: var(--clr-status-alive); }
+.crew-status--dead      { background: var(--clr-status-dead-bg);    color: var(--clr-status-dead); }
+.crew-status--unknown   { background: var(--clr-status-unknown-bg); color: var(--clr-status-unknown); }
+
+/**
+ * @component SagasTimeline
+ * @description Linha do tempo vertical das sagas. Linha conectora via
+ *   ::before no container; cada item tem dot numérico e corpo com
+ *   título e badges de arcos/episódios.
+ *
+ * @tokens-consumed
+ *   --clr-surface-2 / --clr-surface-3 / --clr-border
+ *   --clr-gold / --clr-red / --clr-ocean-light
+ *   --clr-text / --clr-text-muted / --clr-bg
+ *   --fs-h3 / --fs-sm / --fs-dot
+ *   --space-md / --space-lg / --space-xs
+ *   --timeline-dot-size / --radius-full / --radius-xs / --radius-md / --radius-sm
+ *   --shadow-md / --glow-gold / --ease-base
+ *
+ * @states
+ *   .saga-item:hover .saga-item__dot   Fundo dourado + glow
+ *   .saga-item:hover .saga-item__body  Borda iluminada + sombra
+ *
+ * @since Aula 08 | @updated Aula 12
+ */
+/* ── TIMELINE ──────────────────────────────────────────────── */
+.sagas-timeline { position: relative; display: flex; flex-direction: column; gap: 0; }
+.sagas-timeline::before { content: ''; position: absolute; left: 19px; top: 20px; bottom: 20px; width: 2px; background: linear-gradient(180deg, var(--clr-gold) 0%, var(--clr-red) 50%, var(--clr-ocean-light) 100%); border-radius: var(--radius-xs); }
+.saga-item { display: flex; gap: var(--space-md); padding-block-end: var(--space-lg); position: relative; }
+.saga-item__dot { width: var(--timeline-dot-size); height: var(--timeline-dot-size); flex-shrink: 0; border-radius: var(--radius-full); background: var(--clr-surface-2); border: 2.5px solid var(--clr-gold); display: flex; align-items: center; justify-content: center; font-family: 'Cinzel', serif; font-size: var(--fs-dot); font-weight: 700; color: var(--clr-gold); position: relative; z-index: 1; margin-block-start: 2px; transition: background var(--ease-base), box-shadow var(--ease-base); }
+.saga-item:hover .saga-item__dot { background: var(--clr-gold); color: var(--clr-bg); box-shadow: var(--glow-gold); }
+.saga-item__body { flex: 1; background: var(--clr-surface-2); border: 1px solid var(--clr-border); border-radius: var(--radius-md); padding: var(--space-md); transition: border-color var(--ease-base), box-shadow var(--ease-base); }
+.saga-item:hover .saga-item__body { border-color: rgba(245 197 24 / 0.28); box-shadow: var(--shadow-md); }
+.saga-item__title  { font-family: 'Cinzel', serif; font-size: var(--fs-h3); font-weight: 700; color: var(--clr-text); margin-block-end: var(--space-xs); }
+.saga-item__badges { display: flex; flex-wrap: wrap; gap: var(--space-xs); }
+.saga-badge { display: inline-flex; align-items: center; gap: 0.3rem; padding: 0.28rem 0.65rem; background: var(--clr-surface-3); border: 1px solid var(--clr-border); border-radius: var(--radius-full); font-size: var(--fs-sm); color: var(--clr-text-muted); }
+
+/**
+ * @component Footer
+ * @description Rodapé com grid de 3 colunas (marca + redes, explorar,
+ *   recursos) e barra inferior com copyright. Grid torna-se 3 colunas
+ *   via media query ≥768px em responsive.css.
+ *
+ * @tokens-consumed
+ *   --clr-surface / --clr-surface-2 / --clr-border
+ *   --clr-text-muted / --clr-text-dim / --clr-gold / --clr-gold-dark
+ *   --fs-sm / --fs-footer-nav
+ *   --space-xs / --space-sm / --space-md / --space-lg / --space-xl
+ *   --ease-fast / --radius-full
+ *
+ * @states
+ *   .footer__nav a:hover        Texto dourado
+ *   .footer__social-link:hover  Borda + texto dourado + fundo sutil
+ *   .footer__bottom a:hover     Dourado escuro
+ *
+ * @since Aula 12 | @updated Aula 12
+ */
+/* ── FOOTER ────────────────────────────────────────────────── */
+.footer { background: var(--clr-surface); border-top: 1px solid var(--clr-border); padding-block: var(--space-xl) var(--space-lg); }
+.footer__grid { display: grid; grid-template-columns: 1fr; gap: var(--space-lg); margin-block-end: var(--space-xl); }
+.footer__brand p { color: var(--clr-text-muted); font-size: var(--fs-sm); margin-block-start: var(--space-sm); line-height: 1.75; max-width: 320px; }
+.footer__skull { font-size: 4rem; opacity: 0.04; user-select: none; line-height: 1; margin-block-end: var(--space-xs); }
+.footer__nav h3 { font-family: 'Cinzel', serif; font-size: var(--fs-footer-nav); font-weight: 700; color: var(--clr-gold); text-transform: uppercase; letter-spacing: 0.12em; margin-block-end: var(--space-sm); }
+.footer__nav li + li { margin-block-start: var(--space-xs); }
+.footer__nav a { font-size: var(--fs-sm); color: var(--clr-text-muted); transition: color var(--ease-fast); }
+.footer__nav a:hover { color: var(--clr-gold); }
+.footer__social { display: flex; flex-wrap: wrap; gap: var(--space-xs); margin-block-start: var(--space-sm); }
+.footer__social-link { display: inline-flex; align-items: center; gap: 0.35rem; padding: 0.4rem 0.875rem; background: var(--clr-surface-2); border: 1px solid var(--clr-border); border-radius: var(--radius-full); font-size: var(--fs-sm); color: var(--clr-text-muted); transition: border-color var(--ease-fast), color var(--ease-fast), background var(--ease-fast); }
+.footer__social-link:hover { border-color: var(--clr-gold); color: var(--clr-gold); background: rgba(245 197 24 / 0.06); }
+.footer__bottom { padding-block-start: var(--space-md); border-top: 1px solid var(--clr-border); display: flex; flex-direction: column; gap: 0.4rem; }
+.footer__bottom p { font-size: var(--fs-sm); color: var(--clr-text-dim); }
+.footer__bottom a { color: var(--clr-gold); transition: color var(--ease-fast); }
+.footer__bottom a:hover { color: var(--clr-gold-dark); }

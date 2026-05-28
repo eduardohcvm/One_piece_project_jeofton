@@ -1,0 +1,123 @@
+/* ================================================================
+   ONE PIECE WIKI — TOKENS.CSS
+   Convenção de nomenclatura:
+     --clr-*       → cores (paleta, marca, texto, status, tipos)
+     --fs-*        → tamanhos de fonte (tipografia fluida e fixos)
+     --space-*     → espaçamentos internos e externos
+     --radius-*    → bordas arredondadas
+     --shadow-* / --glow-* → sombras e brilhos
+     --ease-*      → durações e curvas de transição
+     --size-*      → dimensões fixas de componentes
+     --header-bg / --nav-bg → fundos semi-transparentes do layout
+   Nenhum arquivo de componente deve conter valores hardcoded;
+   todos os valores primitivos vivem exclusivamente aqui.
+   ================================================================ */
+
+:root {
+
+  /* ── Paleta principal ─────────────────────────────────────── */
+  --clr-bg:           #080c16;
+  --clr-surface:      #0f1623;
+  --clr-surface-2:    #192030;
+  --clr-surface-3:    #212d3e;
+  --clr-border:       rgba(255 255 255 / 0.07);
+  --clr-border-hover: rgba(255 255 255 / 0.14);
+
+  /* ── Marca ────────────────────────────────────────────────── */
+  --clr-gold:         #f5c518;
+  --clr-gold-dark:    #c49a10;
+  --clr-gold-light:   #fde68a;
+  --clr-red:          #e63946;
+  --clr-red-dark:     #b52d38;
+  --clr-red-light:    #f07680;
+  --clr-ocean:        #0e4d6e;
+  --clr-ocean-light:  #1a7aa8;
+
+  /* ── Texto ────────────────────────────────────────────────── */
+  --clr-text:         #e8eaf2;
+  --clr-text-muted:   #7e92ac;
+  --clr-text-dim:     #4f627a;
+
+  /* ── Tipos de Akuma no Mi ─────────────────────────────────── */
+  --clr-paramecia:       #9b59b6;
+  --clr-paramecia-light: #c8a8e0;
+  --clr-zoan:            #27ae60;
+  --clr-zoan-light:      #7ee0a0;
+  --clr-logia:           #e67e22;
+  --clr-logia-light:     #f0b870;
+
+  /* ── Status de personagens / tripulações ──────────────────── */
+  --clr-status-alive:      #4cd884;
+  --clr-status-dead:       #f07070;
+  --clr-status-unknown:    #8fb0b0;
+  --clr-status-alive-bg:   rgba(39 174 96 / 0.18);
+  --clr-status-dead-bg:    rgba(231 76 60 / 0.18);
+  --clr-status-unknown-bg: rgba(149 165 166 / 0.18);
+
+  /* ── Fundos semi-transparentes ────────────────────────────── */
+  --header-bg:          rgba(8 12 22 / 0.88);
+  --header-bg-scrolled: rgba(8 12 22 / 0.97);
+  --nav-bg:             rgba(8 12 22 / 0.97);
+
+  /* ── Espaçamentos ─────────────────────────────────────────── */
+  --space-xs:  0.5rem;
+  --space-sm:  1rem;
+  --space-md:  1.5rem;
+  --space-lg:  2rem;
+  --space-xl:  3rem;
+  --space-2xl: 4.5rem;
+
+  /* ── Tipografia fluida (clamp) ────────────────────────────── */
+  --fs-base: clamp(0.875rem, 1.8vw, 1rem);
+  --fs-sm:   clamp(0.75rem,  1.4vw, 0.875rem);
+  --fs-lg:   clamp(1rem,     2.2vw, 1.25rem);
+  --fs-h1:   clamp(2.5rem,   8vw,   5.5rem);
+  --fs-h2:   clamp(1.75rem,  4vw,   2.75rem);
+  --fs-h3:   clamp(1.125rem, 2.5vw, 1.5rem);
+
+  /* ── Tipografia fixa (componentes) ───────────────────────── */
+  --fs-logo:       1.2rem;
+  --fs-logo-sm:    1.1rem;
+  --fs-icon:       1.4rem;
+  --fs-icon-lg:    1.5rem;
+  --fs-stat:       1.875rem;
+  --fs-avatar:     1.15rem;
+  --fs-card-title: 0.95rem;
+  --fs-card-meta:  0.82rem;
+  --fs-tag:        0.65rem;
+  --fs-tag-xs:     0.60rem;
+  --fs-status:     0.68rem;
+  --fs-dot:        0.75rem;
+  --fs-footer-nav: 0.8rem;
+  --fs-skull:      clamp(180px, 35vw, 480px);
+
+  /* ── Bordas arredondadas ──────────────────────────────────── */
+  --radius-xs:   0.25rem;
+  --radius-sm:   0.5rem;
+  --radius-md:   0.875rem;
+  --radius-lg:   1.25rem;
+  --radius-full: 9999px;
+
+  /* ── Sombras e brilhos ────────────────────────────────────── */
+  --shadow-sm:  0 2px 8px  rgba(0 0 0 / 0.35);
+  --shadow-md:  0 4px 20px rgba(0 0 0 / 0.45);
+  --shadow-lg:  0 8px 40px rgba(0 0 0 / 0.55);
+  --glow-gold:  0 0 24px   rgba(245 197 24 / 0.35);
+  --glow-red:   0 0 24px   rgba(230 57  70 / 0.35);
+
+  /* ── Transições ───────────────────────────────────────────── */
+  --ease-fast: 150ms ease;
+  --ease-base: 280ms ease;
+  --ease-slow: 500ms ease;
+
+  /* ── Layout e tamanhos de componentes ─────────────────────── */
+  --container-max:     1240px;
+  --header-h:          68px;
+  --hamburger-size:    42px;
+  --avatar-size:       54px;
+  --emblem-size:       58px;
+  --fruit-icon-size:   50px;
+  --back-to-top-size:  46px;
+  --search-btn-size:   46px;
+  --timeline-dot-size: 40px;
+}

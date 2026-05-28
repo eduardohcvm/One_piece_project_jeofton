@@ -146,10 +146,17 @@ function observeFadeIn() {
    ════════════════════════════════════════════════════════════ */
 
 /* ── Personagens ─────────────────────────────────────────── */
+function resolveStr(val) {
+  if (!val || val === 'null') return null;
+  if (typeof val === 'object') return val.name || val.title || Object.values(val).find(v => typeof v === 'string') || null;
+  return String(val);
+}
+
 function buildCharCard(char) {
   const sc   = statusClass(char.status);
   const bou  = formatBounty(char.bounty);
   const init = initials(char.name);
+  const crew = resolveStr(char.crew);
   const hasFruit = char.fruit && char.fruit !== 'null';
 
   return `
@@ -170,7 +177,7 @@ function buildCharCard(char) {
         </div>
         <div class="char-card__stat">
           <span class="char-card__stat-label">Tripulação</span>
-          <span class="char-card__stat-value">${sanitize(char.crew || 'N/A')}</span>
+          <span class="char-card__stat-value">${sanitize(crew || 'N/A')}</span>
         </div>
         ${char.age ? `<div class="char-card__stat">
           <span class="char-card__stat-label">Idade</span>
@@ -234,8 +241,8 @@ function renderFruits(list) {
 /* ── Tripulações ─────────────────────────────────────────── */
 function buildCrewCard(crew) {
   const isYonko = ['true', '1', 1, true].includes(crew.is_yonko);
-  const sc      = crewStatusClass(crew.status);
-  const emoji   = crewEmoji(crew.name);
+  const sc      = crewStatusClass(resolveStr(crew.status) || crew.status);
+  const emoji   = crewEmoji(resolveStr(crew.name) || crew.name);
 
   return `
     <article class="crew-card ${isYonko ? 'crew-card--yonko' : ''} fade-in" role="listitem">
