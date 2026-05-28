@@ -47,9 +47,12 @@
   --clr-logia-light:     #f0b870;
 
   /* ── Status de personagens / tripulações ──────────────────── */
-  --clr-status-alive:   #4cd884;
-  --clr-status-dead:    #f07070;
-  --clr-status-unknown: #8fb0b0;
+  --clr-status-alive:      #4cd884;
+  --clr-status-dead:       #f07070;
+  --clr-status-unknown:    #8fb0b0;
+  --clr-status-alive-bg:   rgba(39 174 96 / 0.18);
+  --clr-status-dead-bg:    rgba(231 76 60 / 0.18);
+  --clr-status-unknown-bg: rgba(149 165 166 / 0.18);
 
   /* ── Fundos semi-transparentes ────────────────────────────── */
   --header-bg:          rgba(8 12 22 / 0.88);
