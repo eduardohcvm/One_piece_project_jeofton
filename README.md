@@ -17,6 +17,9 @@ wireframe
 <img width="769" height="528" alt="{B7D5961A-ECBE-4A05-B6CD-D28F1433C291}" src="https://github.com/user-attachments/assets/3ca59b85-e89f-4b32-8d84-d081bad53e29" />
 
 
+Devtools teste
+<img width="1363" height="765" alt="{905BAC77-36D5-4F57-9133-D4F6DC350730}" src="https://github.com/user-attachments/assets/a16b8a04-2503-40bf-91f3-ec161194c0fb" />
+
 
 
 ## Funcionalidades
