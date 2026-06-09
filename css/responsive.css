@@ -15,7 +15,7 @@
 
   .nav {
     position: static;
-    transform: none !important;
+    transform: none;   /* sem !important: cascata por ordem de origem já vence .nav--open */
     background: none;
     padding: 0;
     border: none;

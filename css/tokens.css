@@ -1,65 +1,76 @@
 /* ================================================================
    ONE PIECE WIKI — TOKENS.CSS
-   Convenção de nomenclatura:
-     --clr-*       → cores (paleta, marca, texto, status, tipos)
-     --fs-*        → tamanhos de fonte (tipografia fluida e fixos)
-     --space-*     → espaçamentos internos e externos
-     --radius-*    → bordas arredondadas
-     --shadow-* / --glow-* → sombras e brilhos
-     --ease-*      → durações e curvas de transição
-     --size-*      → dimensões fixas de componentes
-     --header-bg / --nav-bg → fundos semi-transparentes do layout
-   Nenhum arquivo de componente deve conter valores hardcoded;
-   todos os valores primitivos vivem exclusivamente aqui.
+   ----------------------------------------------------------------
+   ARQUITETURA DE DUAS CAMADAS (two-tier design tokens):
+
+     CAMADA 1 — PRIMITIVOS  (valores crus, SEM significado)
+       Escalas de cor (hex), canais RGB para composição com alpha,
+       escalas de espaçamento, raio, tipografia, sombra e tempo.
+       Um primitivo nunca é usado diretamente nos componentes.
+
+     CAMADA 2 — SEMÂNTICOS  (significado, referenciam primitivos)
+       --clr-bg, --clr-surface, --clr-gold, --clr-text, --space-*…
+       É ISTO que os componentes consomem. Trocar a marca = editar
+       o mapeamento aqui; nenhum arquivo de componente muda.
+
+   Convenção de nomenclatura semântica:
+     --clr-*    cores        --fs-*     tamanhos de fonte
+     --space-*  espaçamentos  --radius-* bordas arredondadas
+     --shadow-*/--glow-* sombras e brilhos   --ease-* transições
+     --rgb-*    canais R G B (primitivo, p/ rgb(var(--rgb-x) / a))
+
+   REGRA: nenhum componente contém valor hardcoded. Cores com
+   transparência usam rgb(var(--rgb-*) / alpha) — a cor vem do
+   token; só o alpha (opacidade do efeito) é contextual.
    ================================================================ */
 
 :root {
 
-  /* ── Paleta principal ─────────────────────────────────────── */
-  --clr-bg:           #080c16;
-  --clr-surface:      #0f1623;
-  --clr-surface-2:    #192030;
-  --clr-surface-3:    #212d3e;
-  --clr-border:       rgba(255 255 255 / 0.07);
-  --clr-border-hover: rgba(255 255 255 / 0.14);
+  /* ════════════════════════════════════════════════════════════
+     CAMADA 1 — PRIMITIVOS
+     ════════════════════════════════════════════════════════════ */
 
-  /* ── Marca ────────────────────────────────────────────────── */
-  --clr-gold:         #f5c518;
-  --clr-gold-dark:    #c49a10;
-  --clr-gold-light:   #fde68a;
-  --clr-red:          #e63946;
-  --clr-red-dark:     #b52d38;
-  --clr-red-light:    #f07680;
-  --clr-ocean:        #0e4d6e;
-  --clr-ocean-light:  #1a7aa8;
+  /* ── Escala de cor (hex cru — sem significado) ─────────────── */
+  --gold-300:   #fde68a;
+  --gold-500:   #f5c518;
+  --gold-700:   #c49a10;
+  --red-300:    #f07680;
+  --red-500:    #e63946;
+  --red-700:    #b52d38;
+  --ocean-400:  #1a7aa8;
+  --ocean-600:  #0e4d6e;
+  --purple-300: #c8a8e0;
+  --purple-500: #9b59b6;
+  --green-300:  #7ee0a0;
+  --green-500:  #27ae60;
+  --orange-300: #f0b870;
+  --orange-500: #e67e22;
+  --navy-950:   #080c16;
+  --navy-925:   #0d1825;
+  --navy-900:   #0f1623;
+  --navy-800:   #192030;
+  --navy-700:   #212d3e;
+  --slate-100:  #e8eaf2;
+  --slate-400:  #7e92ac;
+  --slate-600:  #6f86a6;   /* clareado p/ contraste WCAG AA (≥4.5:1) */
+  --signal-alive:   #4cd884;
+  --signal-dead:    #f07070;
+  --signal-unknown: #8fb0b0;
 
-  /* ── Texto ────────────────────────────────────────────────── */
-  --clr-text:         #e8eaf2;
-  --clr-text-muted:   #7e92ac;
-  --clr-text-dim:     #4f627a;
+  /* ── Canais RGB (primitivo p/ composição com alpha) ────────── */
+  --rgb-gold:    245 197 24;
+  --rgb-red:     230 57 70;
+  --rgb-ocean:   14 77 110;
+  --rgb-purple:  155 89 182;
+  --rgb-green:   39 174 96;
+  --rgb-orange:  230 126 34;
+  --rgb-white:   255 255 255;
+  --rgb-black:   0 0 0;
+  --rgb-navy:    8 12 22;
+  --rgb-dead:    231 76 60;
+  --rgb-unknown: 149 165 166;
 
-  /* ── Tipos de Akuma no Mi ─────────────────────────────────── */
-  --clr-paramecia:       #9b59b6;
-  --clr-paramecia-light: #c8a8e0;
-  --clr-zoan:            #27ae60;
-  --clr-zoan-light:      #7ee0a0;
-  --clr-logia:           #e67e22;
-  --clr-logia-light:     #f0b870;
-
-  /* ── Status de personagens / tripulações ──────────────────── */
-  --clr-status-alive:      #4cd884;
-  --clr-status-dead:       #f07070;
-  --clr-status-unknown:    #8fb0b0;
-  --clr-status-alive-bg:   rgba(39 174 96 / 0.18);
-  --clr-status-dead-bg:    rgba(231 76 60 / 0.18);
-  --clr-status-unknown-bg: rgba(149 165 166 / 0.18);
-
-  /* ── Fundos semi-transparentes ────────────────────────────── */
-  --header-bg:          rgba(8 12 22 / 0.88);
-  --header-bg-scrolled: rgba(8 12 22 / 0.97);
-  --nav-bg:             rgba(8 12 22 / 0.97);
-
-  /* ── Espaçamentos ─────────────────────────────────────────── */
+  /* ── Escala de espaçamento (cru) ──────────────────────────── */
   --space-xs:  0.5rem;
   --space-sm:  1rem;
   --space-md:  1.5rem;
@@ -67,7 +78,7 @@
   --space-xl:  3rem;
   --space-2xl: 4.5rem;
 
-  /* ── Tipografia fluida (clamp) ────────────────────────────── */
+  /* ── Escala tipográfica fluida (cru) ──────────────────────── */
   --fs-base: clamp(0.875rem, 1.8vw, 1rem);
   --fs-sm:   clamp(0.75rem,  1.4vw, 0.875rem);
   --fs-lg:   clamp(1rem,     2.2vw, 1.25rem);
@@ -75,7 +86,7 @@
   --fs-h2:   clamp(1.75rem,  4vw,   2.75rem);
   --fs-h3:   clamp(1.125rem, 2.5vw, 1.5rem);
 
-  /* ── Tipografia fixa (componentes) ───────────────────────── */
+  /* ── Escala tipográfica fixa (componentes) ────────────────── */
   --fs-logo:       1.2rem;
   --fs-logo-sm:    1.1rem;
   --fs-icon:       1.4rem;
@@ -91,26 +102,19 @@
   --fs-footer-nav: 0.8rem;
   --fs-skull:      clamp(180px, 35vw, 480px);
 
-  /* ── Bordas arredondadas ──────────────────────────────────── */
+  /* ── Escala de raio (cru) ─────────────────────────────────── */
   --radius-xs:   0.25rem;
   --radius-sm:   0.5rem;
   --radius-md:   0.875rem;
   --radius-lg:   1.25rem;
   --radius-full: 9999px;
 
-  /* ── Sombras e brilhos ────────────────────────────────────── */
-  --shadow-sm:  0 2px 8px  rgba(0 0 0 / 0.35);
-  --shadow-md:  0 4px 20px rgba(0 0 0 / 0.45);
-  --shadow-lg:  0 8px 40px rgba(0 0 0 / 0.55);
-  --glow-gold:  0 0 24px   rgba(245 197 24 / 0.35);
-  --glow-red:   0 0 24px   rgba(230 57  70 / 0.35);
-
-  /* ── Transições ───────────────────────────────────────────── */
+  /* ── Escala de tempo/curva (cru) ──────────────────────────── */
   --ease-fast: 150ms ease;
   --ease-base: 280ms ease;
   --ease-slow: 500ms ease;
 
-  /* ── Layout e tamanhos de componentes ─────────────────────── */
+  /* ── Dimensões fixas de componentes (cru) ─────────────────── */
   --container-max:     1240px;
   --header-h:          68px;
   --hamburger-size:    42px;
@@ -120,4 +124,61 @@
   --back-to-top-size:  46px;
   --search-btn-size:   46px;
   --timeline-dot-size: 40px;
+
+
+  /* ════════════════════════════════════════════════════════════
+     CAMADA 2 — SEMÂNTICOS  (referenciam primitivos)
+     ════════════════════════════════════════════════════════════ */
+
+  /* ── Superfícies / fundo ──────────────────────────────────── */
+  --clr-bg:           var(--navy-950);
+  --clr-surface:      var(--navy-900);
+  --clr-surface-2:    var(--navy-800);
+  --clr-surface-3:    var(--navy-700);
+  --clr-surface-deep: var(--navy-925);   /* parada intermediária de gradiente */
+  --clr-border:       rgb(var(--rgb-white) / 0.07);
+  --clr-border-hover: rgb(var(--rgb-white) / 0.14);
+
+  /* ── Marca ────────────────────────────────────────────────── */
+  --clr-gold:         var(--gold-500);
+  --clr-gold-dark:    var(--gold-700);
+  --clr-gold-light:   var(--gold-300);
+  --clr-red:          var(--red-500);
+  --clr-red-dark:     var(--red-700);
+  --clr-red-light:    var(--red-300);
+  --clr-ocean:        var(--ocean-600);
+  --clr-ocean-light:  var(--ocean-400);
+
+  /* ── Texto ────────────────────────────────────────────────── */
+  --clr-text:         var(--slate-100);
+  --clr-text-muted:   var(--slate-400);
+  --clr-text-dim:     var(--slate-600);
+
+  /* ── Tipos de Akuma no Mi ─────────────────────────────────── */
+  --clr-paramecia:       var(--purple-500);
+  --clr-paramecia-light: var(--purple-300);
+  --clr-zoan:            var(--green-500);
+  --clr-zoan-light:      var(--green-300);
+  --clr-logia:           var(--orange-500);
+  --clr-logia-light:     var(--orange-300);
+
+  /* ── Status de personagens / tripulações ──────────────────── */
+  --clr-status-alive:      var(--signal-alive);
+  --clr-status-dead:       var(--signal-dead);
+  --clr-status-unknown:    var(--signal-unknown);
+  --clr-status-alive-bg:   rgb(var(--rgb-green)   / 0.18);
+  --clr-status-dead-bg:    rgb(var(--rgb-dead)    / 0.18);
+  --clr-status-unknown-bg: rgb(var(--rgb-unknown) / 0.18);
+
+  /* ── Fundos semi-transparentes do layout ──────────────────── */
+  --header-bg:          rgb(var(--rgb-navy) / 0.88);
+  --header-bg-scrolled: rgb(var(--rgb-navy) / 0.97);
+  --nav-bg:             rgb(var(--rgb-navy) / 0.97);
+
+  /* ── Sombras e brilhos ────────────────────────────────────── */
+  --shadow-sm:  0 2px 8px  rgb(var(--rgb-black) / 0.35);
+  --shadow-md:  0 4px 20px rgb(var(--rgb-black) / 0.45);
+  --shadow-lg:  0 8px 40px rgb(var(--rgb-black) / 0.55);
+  --glow-gold:  0 0 24px   rgb(var(--rgb-gold)  / 0.35);
+  --glow-red:   0 0 24px   rgb(var(--rgb-red)   / 0.35);
 }
