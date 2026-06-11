@@ -6,5 +6,5 @@
 
 @import url('tokens.css');      /* 1. Tokens de design (variáveis) */
 @import url('base.css');        /* 2. Reset, utilitários e UI global */
-@import url('components.css');  /* 3. Componentes: header, hero, cards, footer… */
+@import url('components.css');  /* 3. Componentes: header, destaque, cards, footer… */
 @import url('responsive.css');  /* 4. Media queries */

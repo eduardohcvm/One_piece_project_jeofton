@@ -62,14 +62,14 @@ h1, h2, h3, h4 { line-height: 1.2; }
   color: var(--clr-bg);
   box-shadow: var(--glow-gold);
 }
-.btn--primary:hover { box-shadow: 0 0 36px rgba(245 197 24 / 0.55); }
+.btn--primary:hover { box-shadow: 0 0 36px rgb(var(--rgb-gold) /0.55); }
 
 .btn--secondary {
-  background: rgba(230 57 70 / 0.12);
-  border: 1.5px solid rgba(230 57 70 / 0.45);
+  background: rgb(var(--rgb-red) /0.12);
+  border: 1.5px solid rgb(var(--rgb-red) /0.45);
   color: var(--clr-red-light);
 }
-.btn--secondary:hover { background: rgba(230 57 70 / 0.22); box-shadow: var(--glow-red); }
+.btn--secondary:hover { background: rgb(var(--rgb-red) /0.22); box-shadow: var(--glow-red); }
 
 .btn-load-more {
   display: block;

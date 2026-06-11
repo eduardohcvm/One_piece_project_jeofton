@@ -15,7 +15,7 @@
 
   .nav {
     position: static;
-    transform: none !important;
+    transform: none;   /* sem !important: cascata por ordem de origem já vence .nav--open */
     background: none;
     padding: 0;
     border: none;
@@ -34,7 +34,7 @@
   }
 
   /* Hero: conteúdo respira mais */
-  .hero__content { padding-block: var(--space-2xl); }
+  .destaque__conteudo { padding-block: var(--space-2xl); }
 
   /* Timeline */
   .sagas-timeline::before { left: 24px; }

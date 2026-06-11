@@ -327,7 +327,7 @@ async function loadHeroStats() {
       return v ?? '—';
     };
 
-    $('hero-stats').innerHTML = `
+    $('destaque-estatisticas').innerHTML = `
       <div class="stat-item">
         <span class="stat-item__number">${num(cRes)}</span>
         <span class="stat-item__label">Personagens</span>
@@ -345,7 +345,7 @@ async function loadHeroStats() {
         <span class="stat-item__label">Sagas</span>
       </div>`;
   } catch {
-    $('hero-stats').innerHTML = '';
+    $('destaque-estatisticas').innerHTML = '';
   }
 }
 
@@ -428,33 +428,38 @@ async function loadSagas() {
    ════════════════════════════════════════════════════════════ */
 
 function setupEvents() {
-  /* ── Hamburger ── */
+  /* ── Hamburger / Menu mobile ── */
   const hamburger = $('hamburger');
   const nav       = $('nav');
+  const backdrop  = $('nav-backdrop');
+
+  function openNav() {
+    hamburger?.classList.add('hamburger--open');
+    nav?.classList.add('nav--open');
+    backdrop?.classList.add('nav-backdrop--visible');
+    hamburger?.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeNav() {
+    hamburger?.classList.remove('hamburger--open');
+    nav?.classList.remove('nav--open');
+    backdrop?.classList.remove('nav-backdrop--visible');
+    hamburger?.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  }
 
   hamburger?.addEventListener('click', () => {
-    const open = hamburger.classList.toggle('hamburger--open');
-    nav.classList.toggle('nav--open', open);
-    hamburger.setAttribute('aria-expanded', String(open));
+    nav?.classList.contains('nav--open') ? closeNav() : openNav();
   });
 
-  qsa('.nav__link').forEach(link => {
-    link.addEventListener('click', () => {
-      hamburger?.classList.remove('hamburger--open');
-      nav?.classList.remove('nav--open');
-      hamburger?.setAttribute('aria-expanded', 'false');
-    });
-  });
+  qsa('.nav__link').forEach(link => link.addEventListener('click', closeNav));
 
-  /* Fecha nav ao clicar fora */
-  document.addEventListener('click', e => {
-    if (nav?.classList.contains('nav--open') &&
-        !nav.contains(e.target) &&
-        !hamburger?.contains(e.target)) {
-      hamburger?.classList.remove('hamburger--open');
-      nav.classList.remove('nav--open');
-      hamburger?.setAttribute('aria-expanded', 'false');
-    }
+  backdrop?.addEventListener('click', closeNav);
+
+  /* Tecla Esc fecha o menu */
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && nav?.classList.contains('nav--open')) closeNav();
   });
 
   /* ── Scroll: header + back-to-top + nav ativo ── */
