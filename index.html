@@ -3,11 +3,28 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Explore o universo de One Piece — personagens, Akuma no Mi, tripulações e sagas.">
+  <meta name="description" content="Explore o universo de One Piece — personagens, Akuma no Mi, tripulações e sagas. Dados em tempo real da API One Piece.">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#080c16">
+
+  <!-- Open Graph -->
+  <meta property="og:type"        content="website">
+  <meta property="og:title"       content="One Piece Wiki — O Mundo dos Piratas">
+  <meta property="og:description" content="Explore o universo épico criado por Eiichiro Oda. Personagens lendários, Akuma no Mi misteriosas, tripulações e sagas inesquecíveis.">
+  <meta property="og:locale"      content="pt_BR">
+
   <title>One Piece Wiki — O Mundo dos Piratas</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- DNS prefetch para a API -->
+  <link rel="dns-prefetch" href="https://api.api-onepiece.com">
+  <link rel="preconnect"   href="https://fonts.googleapis.com">
+  <link rel="preconnect"   href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- Fonte com display=swap (já previne FOIT) -->
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- CSS crítico com preload -->
+  <link rel="preload" href="css/style.css" as="style">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -36,6 +53,9 @@
       </nav>
     </div>
   </header>
+
+  <!-- Backdrop do menu mobile -->
+  <div class="nav-backdrop" id="nav-backdrop" aria-hidden="true"></div>
 
   <!-- ── DESTAQUE ──────────────────────────────────────── -->
   <section class="destaque" id="home" aria-label="Introdução">
