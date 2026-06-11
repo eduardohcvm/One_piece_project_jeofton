@@ -327,7 +327,7 @@ async function loadHeroStats() {
       return v ?? '—';
     };
 
-    $('hero-stats').innerHTML = `
+    $('destaque-estatisticas').innerHTML = `
       <div class="stat-item">
         <span class="stat-item__number">${num(cRes)}</span>
         <span class="stat-item__label">Personagens</span>
@@ -345,7 +345,7 @@ async function loadHeroStats() {
         <span class="stat-item__label">Sagas</span>
       </div>`;
   } catch {
-    $('hero-stats').innerHTML = '';
+    $('destaque-estatisticas').innerHTML = '';
   }
 }
 
